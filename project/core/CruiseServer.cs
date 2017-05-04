@@ -483,6 +483,26 @@ namespace ThoughtWorks.CruiseControl.Core
         }
         #endregion
 
+
+        public virtual HostPerformanceResponse GetHostPerformance(ServerRequest request)
+        {
+            IHostPerformance perf = null;
+            HostPerformanceResponse response = new HostPerformanceResponse(RunServerRequest(request,
+                null,
+                null,
+                delegate
+                {
+                    perf = executionEnvironment.GetPerformanceCounters();
+                }));
+            if (perf != null)
+            {
+                response.Cpu = perf.Cpu;
+                response.Memory = perf.Memory;
+                response.Disk = perf.Disk;
+            }
+            return response;
+        }
+
         #region SendMessage()
         /// <summary>
         /// Send a text message to the server.

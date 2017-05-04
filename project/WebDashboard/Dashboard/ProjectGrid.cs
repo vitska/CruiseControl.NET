@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using ThoughtWorks.CruiseControl.Core.Reporting.Dashboard.Navigation;
 using ThoughtWorks.CruiseControl.Remote;
 using ThoughtWorks.CruiseControl.WebDashboard.Plugins.ProjectReport;
@@ -32,7 +31,9 @@ namespace ThoughtWorks.CruiseControl.WebDashboard.Dashboard
                                        translations));
 			}
 
-            return rows.OrderBy(a => a, GetComparer(sortColumn, sortIsAscending)).ToArray();
+			rows.Sort(GetComparer(sortColumn, sortIsAscending));
+
+			return rows.ToArray();
 		}
 
 		private IComparer<ProjectGridRow> GetComparer(ProjectGridSortColumn column, bool ascending)

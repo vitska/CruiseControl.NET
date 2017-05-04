@@ -89,7 +89,12 @@ namespace ThoughtWorks.CruiseControl.Core.Util
 			}
 			return path;
 		}
-	}
+
+        public IHostPerformance GetPerformanceCounters()
+        {
+            return new HostPerformance();
+        }
+    }
 
     /// <summary>
     /// 	
@@ -128,7 +133,9 @@ namespace ThoughtWorks.CruiseControl.Core.Util
         /// <returns></returns>
         /// <remarks></remarks>
 		string EnsurePathIsRooted(string path);
-	}
+
+        IHostPerformance GetPerformanceCounters();
+    }
 
     /// <summary>
     /// 	

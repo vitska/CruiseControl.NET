@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
+using ThoughtWorks.CruiseControl.Remote;
 
-namespace Cruise.DashboardBroker {
+namespace Cruise.DashboardBroker
+{
     using Remote;
 
     public class BuildServer:ServerBase, IScheduleProcess {
@@ -36,6 +36,7 @@ namespace Cruise.DashboardBroker {
 
         public BuildServer(string name, IBuildServerClient client) : base(name, null) {
             _client = client;
+            _perf = new BuildServerPerformance();
             BackScheduler.Instance.Add(this, 1000);
         }
 
@@ -52,9 +53,50 @@ namespace Cruise.DashboardBroker {
             ResetLastChange(true);
         }
 
-        //public IEnumerator GetEnumerator() {
-        //    throw new NotImplementedException();
-        //}
+        static Project.BuildStatusType GetBuildStatus(ProjectStatus proj)
+        {
+            switch (proj.BuildStatus)
+            {
+                case IntegrationStatus.Cancelled:
+                case IntegrationStatus.Exception:
+                case IntegrationStatus.Failure:
+                    return Project.BuildStatusType.Failure;
+
+                case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Success:
+                    return Project.BuildStatusType.Success;
+
+                case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Unknown:
+                    return Project.BuildStatusType.Unknown;
+            }
+            return Project.BuildStatusType.Unknown;
+        }
+
+        static Project.CCStatusType GetCruiseStatus(ProjectStatus proj)
+        {
+            switch (proj.Status)
+            {
+                case ProjectIntegratorState.Running:
+                    return Project.CCStatusType.Running;
+
+                case ProjectIntegratorState.Stopped:
+                    return Project.CCStatusType.Stopped;
+
+                case ProjectIntegratorState.Stopping:
+                    return Project.CCStatusType.Stopping;
+
+                default:
+                    return Project.CCStatusType.Unknown;
+            }
+        }
+
+        static Project.CCActivityType GetCruiseActivity(ProjectStatus proj)
+        {
+            if (proj.Activity.IsBuilding()) return Project.CCActivityType.Building;
+            if (proj.Activity.IsPending()) return Project.CCActivityType.Pending;
+            if (proj.Activity.IsSleeping()) return Project.CCActivityType.Sleeping;
+            if (proj.Activity.IsCheckingModifications()) return Project.CCActivityType.CheckingModifications;
+            return Project.CCActivityType.Unknown;
+        }
 
         public void ScheduleRun() {
             //---------- offline mode
@@ -63,7 +105,9 @@ namespace Cruise.DashboardBroker {
             //}
             //return;
 
-            foreach(var proj in _client.GetProjectsStatus()) {
+            ((BuildServerPerformance)_perf).Update(_client.GetServerPerformanceStatus());
+
+            foreach (var proj in _client.GetProjectsStatus()) {
                 var id = Project.GetProjectId(Name,proj.Name);
                 if( //(_projects.Count < 1) && 
                     !_projects.Keys.Any(pk => pk == id)) {
@@ -71,41 +115,19 @@ namespace Cruise.DashboardBroker {
                 }
                 if(!_projects.ContainsKey(id))continue;
                 _projects[id].NextBuild = proj.NextBuildTime;
-                switch(proj.BuildStatus) {
-                    case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Cancelled:
-                    case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Exception:
-                    case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Failure:
-                        _projects[id].BuildStatus = Project.BuildStatusType.Failure;
-                        break;
-                    case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Success:
-                        _projects[id].BuildStatus = Project.BuildStatusType.Success;
-                        break;
-                    case ThoughtWorks.CruiseControl.Remote.IntegrationStatus.Unknown:
-                        _projects[id].BuildStatus = Project.BuildStatusType.Unknown;
-                        break;
+                _projects[id].Label = proj.LastBuildLabel;
+                var ccactivity = GetCruiseActivity(proj);
+                if (
+                    !_projects[id].AvgBuildTimeIsSet ||
+                    ((_projects[id].CCActivity == Project.CCActivityType.Building) && (_projects[id].CCActivity != ccactivity))
+                    )
+                {
+                    _projects[id].AvgBuildTime = _client.GetAverageBuildTime(proj.Name);
+                    //"log20170424193441Lbuild.282.xml,log20170424193210Lbuild.281.xml,log20170424152429Lbuild.280.xml,log20170424151131Lbuild.279.xml,log20170424150444Lbuild.278.xml"
                 }
-                if(proj.Activity.IsBuilding())_projects[id].CCActivity = Project.CCActivityType.Building;
-                if(proj.Activity.IsPending())_projects[id].CCActivity = Project.CCActivityType.Pending;
-                if(proj.Activity.IsSleeping())_projects[id].CCActivity = Project.CCActivityType.Sleeping;
-                if(proj.Activity.IsCheckingModifications())_projects[id].CCActivity = Project.CCActivityType.CheckingModifications;
-
-                switch(proj.Status) {
-                    case ThoughtWorks.CruiseControl.Remote.ProjectIntegratorState.Running:
-                        _projects[id].CCStatus = Project.CCStatusType.Running;
-                        break;
-                    case ThoughtWorks.CruiseControl.Remote.ProjectIntegratorState.Stopped:
-                        _projects[id].CCStatus = Project.CCStatusType.Stopped;
-                        break;
-                    case ThoughtWorks.CruiseControl.Remote.ProjectIntegratorState.Stopping:
-                        _projects[id].CCStatus = Project.CCStatusType.Stopping;
-                        break;
-                    default:
-                        _projects[id].CCStatus = Project.CCStatusType.Unknown;
-                        break;
-                }
-
-                //proj.ShowForceBuildButton
-                //proj.ShowStartStopButton
+                _projects[id].CCActivity = GetCruiseActivity(proj);
+                _projects[id].BuildStatus = GetBuildStatus(proj);
+                _projects[id].CCStatus = GetCruiseStatus(proj);
             }
 
         }

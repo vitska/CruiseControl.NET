@@ -36,6 +36,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -177,37 +178,23 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configuration\CachingDashboardConfigurationLoader.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\DashboardConfigurationLoader.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\IDashboardConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\IPluginConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\IRemoteServicesConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\NetReflectorPluginConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\NetReflectorRemoteServicesConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Configuration\ServerLocation.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Configuration\CachingDashboardConfigurationLoader.cs" />
+    <Compile Include="Configuration\DashboardConfigurationLoader.cs" />
+    <Compile Include="Configuration\IDashboardConfiguration.cs" />
+    <Compile Include="Configuration\IPluginConfiguration.cs" />
+    <Compile Include="Configuration\IRemoteServicesConfiguration.cs" />
+    <Compile Include="Configuration\NetReflectorPluginConfiguration.cs" />
+    <Compile Include="Configuration\NetReflectorRemoteServicesConfiguration.cs" />
+    <Compile Include="Configuration\ServerLocation.cs" />
     <Compile Include="Configuration\StylesheetConfiguration.cs" />
     <Compile Include="Dashboard\Actions\HtmlReportAction.cs" />
     <Compile Include="Dashboard\Actions\XsltParameter.cs" />
     <Compile Include="Dashboard\CookieSessionStore.cs" />
     <Compile Include="Dashboard\GenericPlugins\HtmlReportPlugin.cs" />
+    <Compile Include="Dashboard\IBuildPlugin.cs" />
     <Compile Include="Dashboard\ImmutableNamedActionWithoutSiteTemplate.cs" />
     <Compile Include="Dashboard\INoSiteTemplateAction.cs" />
+    <Compile Include="Dashboard\IPlugin.cs" />
     <Compile Include="Dashboard\ISecurityPlugin.cs" />
     <Compile Include="Dashboard\ISessionRetriever.cs" />
     <Compile Include="Dashboard\ISessionStore.cs" />
@@ -310,9 +297,6 @@
     <Compile Include="Dashboard\IBuildNameRetriever.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dashboard\IBuildPlugin.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Dashboard\IBuildRetriever.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -329,9 +313,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Dashboard\INamedAction.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Dashboard\IPlugin.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Dashboard\IPluginLinkCalculator.cs">
@@ -956,6 +937,6 @@ cp "$(SolutionDir)xsl"/* "$(ProjectDir)xsl"</PostBuildEvent>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
-  </ProjectExtensions>  
+  </ProjectExtensions>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
 </Project>

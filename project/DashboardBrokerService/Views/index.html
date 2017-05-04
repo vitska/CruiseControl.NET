@@ -41,29 +41,7 @@
       <div class="col-md-8">
         <div class="projects row">
           <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading"><h3 class="panel-title">Projects</h3></div>
-              <table class="table table-bordered project-table tablesorter">
-                <thead>
-                  <tr>
-                    <th style="width: 1em;">&nbsp;</th>
-                    <th>Server<i class="fa"></i></th>
-                    <th>Project<i class="fa"></i></th>
-                    <th>Build<i class="fa"></i></th>
-                    <th>Build time<i class="fa"></i></th>
-                    <th>Next<i class="fa"></i></th>
-                    <th>CC<i class="fa"></i></th>
-                    <th>Activity<i class="fa"></i></th>
-                    <th>
-                      <button type="button" class="btn btn-xs btn-primary cmd-group cmd-abort">Abort</button>
-                      <button type="button" class="btn btn-xs btn-warning cmd-force">Force</button>
-                      <button type="button" class="btn btn-xs btn-success cmd-start">Start</button>
-                      <button type="button" class="btn btn-xs btn-danger cmd-stop">Stop</button></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
+            <div class="panel panel-default" />
           </div>
         </div>
       </div>
@@ -85,7 +63,9 @@
   <script src="st/moment-duration-format.js"></script>
   <script src="st/chartist.mod.js"></script>
   <script src="st/func.js"></script>
-  <script src="st/obj.js"></script>
+  <script src="st/ServerGroup.js"></script>
+  <script src="st/Server.js"></script>
+  <script src="st/ProjectList.js"></script>
   <script src="st/jquery.tablesorter.js"></script>
 <script>
   var project_list = new ProjectList($('.projects .panel'))

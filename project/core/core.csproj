@@ -133,6 +133,7 @@
       <HintPath>..\..\lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NetReflector, Version=1.1.2009.1214, Culture=neutral, PublicKeyToken=2f4dd8b32acbcd8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\NetReflector.dll</HintPath>
@@ -939,8 +940,10 @@
     <Compile Include="util\DefaultPerformanceCounters.cs" />
     <Compile Include="util\DefaultWebFunctions.cs" />
     <Compile Include="util\HashUtils.cs" />
+    <Compile Include="util\HostPerformance.cs" />
     <Compile Include="util\ICompressionService.cs" />
     <Compile Include="util\ICryptoFunctions.cs" />
+    <Compile Include="util\IHostPerformance.cs" />
     <Compile Include="util\IPerformanceCounters.cs" />
     <Compile Include="util\IPrivateData.cs" />
     <Compile Include="util\IWebFunctions.cs" />

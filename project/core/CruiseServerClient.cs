@@ -59,6 +59,17 @@ namespace ThoughtWorks.CruiseControl.Core
         }
         #endregion
 
+        #region GetHostPerformance()
+        /// <summary>
+        /// Gets information about the last build status, current activity and project name.
+        /// for all projects on a cruise server
+        /// </summary>
+        public virtual HostPerformanceResponse GetHostPerformance(ServerRequest request)
+        {
+            return cruiseServer.GetHostPerformance(request);
+        }
+        #endregion
+
         #region Start()
         /// <summary>
         /// Attempts to start a project.

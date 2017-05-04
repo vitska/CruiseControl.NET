@@ -10,8 +10,8 @@ using ThoughtWorks.CruiseControl.WebDashboard.IO;
 
 namespace ThoughtWorks.CruiseControl.WebDashboard.Configuration
 {
-	// ToDo - testing
-	public class DashboardConfigurationLoader : IDashboardConfiguration
+    // ToDo - testing
+    public class DashboardConfigurationLoader : IDashboardConfiguration
 	{
         private const string CONFIG_ASSEMBLY_PATTERN = "ccnet.*.plugin.dll";
 

@@ -260,3 +260,9 @@ body .row {
 .clickable{
   cursor:pointer;
 }
+table.project-table tbody tr:hover {
+	background-color: rgba(255,255,255,0.1);
+}
+.table .progress {
+	margin: 0;
+}

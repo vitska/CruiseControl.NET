@@ -161,6 +161,7 @@
     <Compile Include="Messages\ListRequest.cs" />
     <Compile Include="Messages\ListBuildSummaryResponse.cs" />
     <Compile Include="Messages\ProjectItemRequest.cs" />
+    <Compile Include="Messages\HostPerformanceResponse.cs" />
     <Compile Include="Monitor\BuildQueue.cs" />
     <Compile Include="Monitor\BuildQueueChangedArgs.cs" />
     <Compile Include="Monitor\BuildQueueRequest.cs" />

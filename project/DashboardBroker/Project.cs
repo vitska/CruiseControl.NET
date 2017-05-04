@@ -10,13 +10,24 @@ namespace Cruise.DashboardBroker {
 
         readonly object _locker = new object();
 
-        int _avgBuildTime = 0;
-        int AvgBuildTime { get { lock(_locker) { return _avgBuildTime; } } }
+        int _avgBuildTime = -1;
+        public bool AvgBuildTimeIsSet { get { return _avgBuildTime != -1; } }
+        public int AvgBuildTime {
+            get { lock(_locker) { return _avgBuildTime; } }
+            set { lock (_locker) { if (ResetLastChange(_avgBuildTime != value)) _avgBuildTime = value; } }
+        }
 
         DateTime _nextBuild = DateTime.UtcNow;
         public DateTime NextBuild { 
             get { lock(_locker) { return _nextBuild; } }  
             set { lock(_locker) { if(ResetLastChange(_nextBuild != value))_nextBuild = value; } }
+        }
+
+        string _label = string.Empty;
+        public string Label
+        {
+            get { lock (_locker) { return _label; } }
+            set { lock (_locker) { if (ResetLastChange(_label != value)) _label = value; } }
         }
 
         public enum BuildStatusType {Unknown = 0, Success = 1, Failure = 2};
@@ -52,7 +63,8 @@ namespace Cruise.DashboardBroker {
                 { "nb", _server.ToTimeCode(NextBuild) },
                 { "bs", (int)BuildStatus },
                 { "ccs", (int)CCStatus },
-                { "cca", (int)CCActivity }
+                { "cca", (int)CCActivity },
+                { "lb", Label }
             };
         } }
 

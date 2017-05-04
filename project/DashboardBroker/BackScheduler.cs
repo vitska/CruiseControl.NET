@@ -73,7 +73,7 @@ namespace Cruise.DashboardBroker
                     {
                         Item.ScheduleRun();
                     }
-                    catch (Exception x)
+                    catch// (Exception x)
                     {
                     }
                     LastRun = DateTime.Now;
@@ -132,7 +132,7 @@ namespace Cruise.DashboardBroker
                     }
                 }
             }
-            catch (Exception x)
+            catch// (Exception x)
             {
             }
         }

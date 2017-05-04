@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CC052DF-2AFB-4A27-BB68-F8C27C5BA0C8}"
 	ProjectSection(SolutionItems) = preProject
@@ -49,6 +49,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CCNet.VBDemos.Plugin", "CCNet.VBDemos.Plugin\CCNet.VBDemos.Plugin.vbproj", "{6984BCE9-51E5-4F73-BD08-E3E545B6B0A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerShell", "PowerShell\PowerShell.csproj", "{503FFFE2-1711-4319-9951-5FBB7348AE49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteConsoleTest", "RemoteConsoleTest\RemoteConsoleTest.csproj", "{05F00272-FD7C-4E9F-9A71-B0A301338ADF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashboardBroker", "DashboardBroker\DashboardBroker.csproj", "{58FDA727-B574-4C84-927C-0051F9933E33}"
 EndProject
@@ -163,6 +165,12 @@ Global
 		{503FFFE2-1711-4319-9951-5FBB7348AE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{503FFFE2-1711-4319-9951-5FBB7348AE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503FFFE2-1711-4319-9951-5FBB7348AE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Build|Any CPU.ActiveCfg = Release|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Build|Any CPU.Build.0 = Release|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F00272-FD7C-4E9F-9A71-B0A301338ADF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58FDA727-B574-4C84-927C-0051F9933E33}.Build|Any CPU.ActiveCfg = Release|Any CPU
 		{58FDA727-B574-4C84-927C-0051F9933E33}.Build|Any CPU.Build.0 = Release|Any CPU
 		{58FDA727-B574-4C84-927C-0051F9933E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

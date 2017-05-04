@@ -601,8 +601,6 @@
 						
 						$(this).trigger("sortStart");
 						
-						config.sortList = list;
-						
 						// update and store the sortlist
 						var sortList = config.sortList;
 						

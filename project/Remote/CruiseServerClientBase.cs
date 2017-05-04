@@ -86,6 +86,17 @@ namespace ThoughtWorks.CruiseControl.Remote
         }
         #endregion
 
+        #region GetHostPerformance()
+        /// <summary>
+        /// Gets information about the last build status, current activity and project name.
+        /// for all projects on a cruise server
+        /// </summary>
+        public virtual HostPerformanceResponse GetHostPerformance()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
         #region ForceBuild()
         /// <summary>
         /// Forces a build for the named project.

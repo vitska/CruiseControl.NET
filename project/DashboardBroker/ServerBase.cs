@@ -25,7 +25,7 @@ namespace Cruise.DashboardBroker {
             return _staticObject;
         } }
 
-        protected readonly ServerPerformance _perf;
+        protected ServerPerformance _perf;
         public object Perf { get {
             return (_perf == null) ? new object() : _perf.GetChanged();
         } }
