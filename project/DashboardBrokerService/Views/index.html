@@ -1,20 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta charset="utf-8">
-		<title>CC.NET Broker</title>
-		<meta name="description" content="description">
-		<meta name="author" content="vitska">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="st/dash.css">
-    <link rel="stylesheet" href="st/main.css">
-    <link rel="stylesheet" href="st/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="st/bootstrap-theme.min.css">
-		<link href="st/jquery-ui.css" rel="stylesheet">
-		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+        <meta charset="utf-8">
+        <title>CC.NET Broker</title>
+        <meta name="description" content="description">
+        <meta name="author" content="vitska">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="st/css/dash.css">
+        <link rel="stylesheet" href="st/css/main.css">
+        <link rel="stylesheet" href="st/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="st/css/bootstrap-theme.min.css">
+		<link href="st/css/jquery-ui.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 				<script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
@@ -33,6 +33,25 @@
         </button>
         <a class="navbar-brand" href="#">CC.NET Dashboard</a>
       </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+                            <a href="#">Refresh <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">2 sec.</a></li>
+                                <li><a href="#">5 sec.</a></li>
+                                <li><a href="#">10 sec.</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
     </div>
   </nav>
   <div role="main" class="container theme-showcase">
@@ -47,33 +66,26 @@
       </div>
     </div>
   </div>
-    <!--End Container-->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!--<script src="http://code.jquery.com/jquery.js"></script>-->
-    <script src="st/jquery-2.2.4.min.js"></script>
-    <script src="st/jquery-ui.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="st/bootstrap.min.js"></script>
-    <!--<script src="plugins/justified-gallery/jquery.justifiedGallery.min.js"></script>-->
-    <!-- All functions for this theme + document.ready processing -->
-    <!--<script src="js/devoops.js"></script>-->
+    <script src="st/js/jquery-2.2.4.min.js"></script>
+    <script src="st/js/jquery-ui.min.js"></script>
+    <script src="st/js/bootstrap.min.js"></script>
     <script src="st/jQuery-Knob/jquery.knob.min.js"></script>
-    <script src="st/moment.min.js"></script>
-    <script src="st/moment-duration-format.js"></script>
-    <script src="st/chartist.mod.js"></script>
-    <script src="st/func.js"></script>
-    <script src="st/jquery.tablesorter.js"></script>
-    <script src="st/ServerGroup.js"></script>
-    <script src="st/Server.js"></script>
-    <script src="st/ProjectList.js"></script>
+    <script src="st/js/moment.min.js"></script>
+    <script src="st/js/moment-duration-format.js"></script>
+    <script src="st/js/chartist.mod.js"></script>
+    <script src="st/js/func.js"></script>
+    <script src="st/js/jquery.tablesorter.js"></script>
+    <script src="st/js/ServerGroup.js"></script>
+    <script src="st/js/Server.js"></script>
+    <script src="st/js/ProjectList.js"></script>
 <script>
   var project_list = new ProjectList($('.projects .panel'))
   var groups = [
     new ServerGroup({
       url: 'config', 
       panel: $('.servers-panel'),
-      list: project_list
+      list: project_list,
+      refresh: 5000
     })
   ]
 
